@@ -45,6 +45,10 @@ public class TownyExpansion extends PlaceholderExpansion {
     return IDENTIFIER;
   }
 
+  // overriding this will check if the plugin is available automatically
+  @Override
+  public String getRequiredPlugin() { return NAME; }
+
   @Override
   public String getAuthor() {
     return "clip";
