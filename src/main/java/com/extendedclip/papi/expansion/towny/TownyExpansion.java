@@ -62,7 +62,7 @@ public class TownyExpansion extends PlaceholderExpansion {
   @Override
   public boolean register() {
     if (Bukkit.getPluginManager().getPlugin("TownyChat") != null) {
-      chatHook = new TownyChatHook(Towny.getPlugin());
+      chatHook = new TownyChatHook((Towny) Bukkit.getPluginManager().getPlugin(NAME));
       if (chatHook.isEnabled()) {
         getPlaceholderAPI().getLogger().info("Hooked into TownyChat for %towny_chat_<arg>% placeholders");
       } else {
