@@ -104,6 +104,8 @@ public class TownyExpansion extends PlaceholderExpansion {
         return getTownRank(p);
       case "nation_rank":
         return getNationRank(p);
+      case "nation_balance":
+        return getNationBankBalance(p);
     }
 
     if (identifier.startsWith("chat_")) {
@@ -208,4 +210,11 @@ public class TownyExpansion extends PlaceholderExpansion {
     }
     return "";
   }
-}
+  
+  private String getNationBankBalance(Player p) {
+        try {
+            return String.valueOf(TownyUniverse.getDataSource().getResident(p.getName()).getTown().getNation().getHoldingBalance());
+        } catch (Exception e) {
+        }
+        return "";
+    }
