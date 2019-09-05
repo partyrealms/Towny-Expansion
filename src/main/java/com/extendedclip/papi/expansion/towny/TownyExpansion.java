@@ -1,7 +1,7 @@
 /*
  *
  * Towny-Expansion
- * Copyright (C) 2018 Ryan McCarthy
+ * Copyright (C) 2018-2019 Ryan McCarthy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -212,9 +212,10 @@ public class TownyExpansion extends PlaceholderExpansion {
   }
   
   private String getNationBankBalance(Player p) {
-        try {
-            return String.valueOf(TownyUniverse.getDataSource().getResident(p.getName()).getTown().getNation().getHoldingBalance());
-        } catch (Exception e) {
-        }
-        return "";
+    try {
+      return String.valueOf(TownyUniverse.getDataSource().getResident(p.getName()).getTown().getNation().getHoldingBalance());
+    } catch (Exception e) {
     }
+    return "";
+  }
+}
