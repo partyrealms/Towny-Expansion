@@ -25,6 +25,7 @@ import com.palmergames.bukkit.towny.object.TownyUniverse;
 import java.util.List;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class TownyExpansion extends PlaceholderExpansion {
@@ -73,7 +74,8 @@ public class TownyExpansion extends PlaceholderExpansion {
   }
 
   @Override
-  public String onPlaceholderRequest(Player p, String identifier) {
+  public String onRequest(OfflinePlayer p, String identifier) {
+    Player player = (Player) p;
 
     if (p == null) {
       return "";
@@ -81,35 +83,35 @@ public class TownyExpansion extends PlaceholderExpansion {
 
     switch (identifier) {
       case "town":
-        return getPlayersTown(p);
+        return getPlayersTown(player);
       case "friends":
-        return getPlayersFriends(p);
+        return getPlayersFriends(player);
       case "nation":
-        return getPlayersNation(p);
+        return getPlayersNation(player);
       case "title":
-        return getPlayersTownyTitle(p);
+        return getPlayersTownyTitle(player);
       case "town_residents":
-        return getTownResidents(p);
+        return getTownResidents(player);
       case "town_size":
-        return getTownSize(p);
+        return getTownSize(player);
       case "town_tag":
-        return getTownTag(p);
+        return getTownTag(player);
       case "town_balance":
-        return getTownBankBalance(p);
+        return getTownBankBalance(player);
       case "town_mayor":
-        return getTownMayor(p);
+        return getTownMayor(player);
       case "surname":
-        return getPlayersSurname(p);
+        return getPlayersSurname(player);
       case "town_rank":
-        return getTownRank(p);
+        return getTownRank(player);
       case "nation_rank":
-        return getNationRank(p);
+        return getNationRank(player);
       case "nation_balance":
-        return getNationBankBalance(p);
+        return getNationBankBalance(player);
     }
 
     if (identifier.startsWith("chat_")) {
-      return chatHook == null ? null : chatHook.replace(p, identifier.replace("chat_", "")).toString();
+      return chatHook == null ? null : chatHook.replace(player, identifier.replace("chat_", "")).toString();
     }
     return null;
   }
