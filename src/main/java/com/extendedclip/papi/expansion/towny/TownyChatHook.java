@@ -6,9 +6,8 @@ import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.channelTypes;
 import com.palmergames.bukkit.TownyChat.config.ChatSettings;
 import com.palmergames.bukkit.towny.Towny;
-import com.palmergames.bukkit.towny.TownyFormatter;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -16,7 +15,7 @@ public class TownyChatHook {
 
   private Chat chat;
   private Towny towny;
-  private boolean enabled;
+  private final boolean enabled;
 
   public TownyChatHook(Towny towny) {
     if (towny != null) {
@@ -32,7 +31,8 @@ public class TownyChatHook {
 
   public Object replace(Player p, String args) {
     try {
-      Resident r = TownyUniverse.getDataSource().getResident(p.getName());
+      Resident r = TownyUniverse.getInstance().getResident(p.getName());
+      if (r == null) return null;
       switch (args) {
         case "world":
           return String.format(ChatSettings.getWorldTag(), p.getWorld().getName());
@@ -53,6 +53,7 @@ public class TownyChatHook {
         case "nationtagoverride":
           return TownyChatFormatter.formatNationTag(r, true, false);
         case "townytag":
+        case "channeltag":
           return TownyChatFormatter.formatTownyTag(r, false, false);
         case "townyformatted":
           return TownyChatFormatter.formatTownyTag(r, false, true);
@@ -63,24 +64,22 @@ public class TownyChatHook {
         case "surname":
           return r.hasSurname() ? r.getSurname() : "";
         case "townynameprefix":
-          return TownyFormatter.getNamePrefix(r);
+          return r.getNamePrefix();
         case "townynamepostfix":
-          return TownyFormatter.getNamePostfix(r);
+          return r.getNamePostfix();
         case "townyprefix":
-          return r.hasTitle() ? r.getTitle() : TownyFormatter.getNamePrefix(r);
+          return r.hasTitle() ? r.getTitle() : r.getNamePrefix();
         case "townypostfix":
-          return r.hasSurname() ? r.getSurname() : TownyFormatter.getNamePostfix(r);
+          return r.hasSurname() ? r.getSurname() : r.getNamePostfix();
         case "townycolor":
           return r.isMayor() ? ChatSettings.getMayorColour()
               : r.isKing() ? ChatSettings.getKingColour() : ChatSettings.getResidentColour();
         case "group":
-          return TownyUniverse.getPermissionSource().getPlayerGroup(p);
+          return TownyUniverse.getInstance().getPermissionSource().getPlayerGroup(p);
         case "permprefix":
-          return TownyUniverse.getPermissionSource().getPrefixSuffix(r, "prefix");
+          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "prefix");
         case "permsuffix":
-          return TownyUniverse.getPermissionSource().getPrefixSuffix(r, "suffix");
-        case "channeltag":
-          return TownyChatFormatter.formatTownyTag(r, false, false);
+          return TownyUniverse.getInstance().getPermissionSource().getPrefixSuffix(r, "suffix");
       }
       Channel activeChannel = null;
       if (args.contains(":")) {
