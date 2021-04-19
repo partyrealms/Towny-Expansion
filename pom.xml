@@ -19,11 +19,11 @@
     </repository>
     <repository>
       <id>placeholderapi</id>
-      <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
     <repository>
       <id>clips-repo</id>
-      <url>http://repo.extendedclip.com/content/repositories/public/</url>
+      <url>https://repo.extendedclip.com/content/repositories/public/</url>
     </repository>
   </repositories>
 
@@ -31,8 +31,8 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.13-R0.1-SNAPSHOT</version>
-      <scope>compile</scope>
+      <version>1.16.5-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>me.clip</groupId>
@@ -50,6 +50,7 @@
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>TownyChat</artifactId>
       <version>0.87</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -58,7 +59,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.2.0</version>
         <configuration>
           <finalName>${project.name}-${project.version}</finalName>
           <archive>
@@ -72,7 +73,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.2</version>
+        <version>3.8.1</version>
         <configuration>
           <target>1.8</target>
           <source>1.8</source>
