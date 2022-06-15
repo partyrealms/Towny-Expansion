@@ -121,7 +121,7 @@ public class TownyExpansion extends PlaceholderExpansion {
       return TownyUniverse.getInstance().getResident(p.getName()).getTown().getName();
     } catch (Exception e) {
     }
-    return "";
+    return "Nomad";
   }
 
   private String getPlayersFriends(Player p) {
@@ -137,7 +137,7 @@ public class TownyExpansion extends PlaceholderExpansion {
       return TownyUniverse.getInstance().getResident(p.getName()).getTown().getNation().getName();
     } catch (Exception e) {
     }
-    return "";
+    return "None";
   }
 
   private String getPlayersTownyTitle(Player p) {
@@ -145,7 +145,7 @@ public class TownyExpansion extends PlaceholderExpansion {
       return TownyUniverse.getInstance().getResident(p.getName()).getTitle();
     } catch (Exception e) {
     }
-    return "";
+    return "None";
   }
 
   private String getPlayersSurname(Player p) {
